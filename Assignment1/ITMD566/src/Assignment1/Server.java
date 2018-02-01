@@ -11,18 +11,26 @@ import java.net.Socket;
 
 public class Server {
 	        static int i=0;
+	        private static ServerSocket ss;
+	        public Server(ServerSocket socket) {
+	        	ss= socket;
+	        }
+	        public void connect() throws IOException {
+	        	/*invoke accept method and wait for client connection
+				  in order to count quantities so i use thread*/
+	        	while(true) {
+	    			Socket s=ss.accept();
+	    			i++;
+	    			new Thread(new Task(s)).start();   			
+	    			}	
+	        }
       public static void main(String[] args) throws IOException {
-    		//1 create serversocket object
-		   ServerSocket ss = new ServerSocket(8888);
-			/*2 invoke accept method and wait for client connection
-			 * in order to count quantities so i use thread
-			*/
+    		// create serversocket object
+    	    Server s1 = new Server(new ServerSocket(8888)); 
 			System.out.println("*****The server is about to start waiting for client connections*******");
-			while(true) {
-			Socket s=ss.accept();
-			i++;
-			new Thread(new Task(s)).start();
-			}
+			s1.connect();
+			ss.close();
+			
 			
     }
 }
