@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<Customer>  
+    <UserID>20410395</UserID>  
+    <FullName>Tong Wu</FullName>  
+    <FirstName>Tong</FirstName>  
+    <LastName>Wu</LastName>
+    <Password>admin</Password>
+    <IsAdmin>yes</IsAdmin>
+	<Email>twu40@hawk.iit.edu</Email>
+	<Sex>male</Sex>
+	<Balance>100000</Balance>
+</Customer>
