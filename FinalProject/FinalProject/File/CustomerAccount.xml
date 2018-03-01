@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<CustomerAccount>  
+    <CustomerAccountID>00001</CustomerAccountID>  
+    <UserID>20410395</UserID>  
+    <RentCarNumber>0</RentCarNumber>  
+    <BuyCarNumber>1</BuyCarNumber>
+    <Balance>100000</Balance>
+</CustomerAccount>
