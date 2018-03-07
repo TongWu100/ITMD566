@@ -1,2 +1,2 @@
-"UserID";"FulName";"FirstName";"LastName";"Password";"IsAdmin"
-"20410395";"Tong Wu";"Tong";"Wu";"admin";"yes"
+UserID,mobileN,Email,FullName,Password
+002,123-456-7890,user@gmail.com,Ricky Bobby,incunabula

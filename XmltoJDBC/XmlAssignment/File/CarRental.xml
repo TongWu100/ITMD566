@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Car>
+  <carId>001</carId>
+  <carType>BMW i8</carType>
+  <dateRented>03/01/18</dateRented>
+  <dateReturned>03/21/18</dateReturned>
+  <rentCostDaily>500</rentCostDaily>
+</Car>

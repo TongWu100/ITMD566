@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<Car>  
-    <CarID>001</CarID>  
-    <CarName>Benz</CarName>  
-    <CarType>SUV</CarType>  
-    <BuyPrice>50000</BuyPrice>
-    <RentPrice>500</RentPrice>
-</Car>

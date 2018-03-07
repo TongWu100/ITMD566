@@ -1,2 +1,2 @@
-"UserID";"FulName";"FirstName";"LastName";"Password";"IsAdmin";"Email";"Sex";"Balance"
-"20410395";"Tong Wu";"Tong";"Wu";"admin";"yes";"twu40@hawk.iit.edu";"male";"100000"
+UserID,Email,FullName,Password,StreetAddress,City,State,Balance
+002,user@gmail.com,Ricky Bobby,incunabula,3360S,chicago,IL,10000

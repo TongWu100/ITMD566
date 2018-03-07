@@ -1,0 +1,42 @@
+CREATE TABLE `carservice`.`user` (
+  `UserID` VARCHAR(45) NOT NULL,
+  `mobileN` VARCHAR(45) NULL,
+  `Email` VARCHAR(45) NULL,
+  `FullName` VARCHAR(45) NULL,
+  `Password` VARCHAR(45) NULL,
+  PRIMARY KEY (`UserID`));
+
+CREATE TABLE `carservice`.`admin` (
+  `AdminID` VARCHAR(45) NOT NULL,
+  `FullName` VARCHAR(45) NULL,
+  `Password` VARCHAR(45) NULL,
+  PRIMARY KEY (`AdminID`));
+
+CREATE TABLE `carservice`.`partservices` (
+  `PartId` VARCHAR(45) NOT NULL,
+  `PartType` VARCHAR(45) NULL,
+  `PartAmount` DOUBLE NULL,
+  `Cost` DOUBLE NULL,
+  PRIMARY KEY (`PartId`));
+
+CREATE TABLE `carservice`.`carrental` (
+  `carId` VARCHAR(45) NOT NULL,
+  `carType` VARCHAR(45) NULL,
+  `dateRented` VARCHAR(45) NULL,
+  `dateReturned` VARCHAR(45) NULL,
+  `rentCostDaily` DOUBLE NULL,
+  PRIMARY KEY (`carId`));
+
+CREATE TABLE `carservice`.`customer` (
+  `UserID` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NULL,
+  `FullName` VARCHAR(45) NULL,
+  `Password` VARCHAR(45) NULL,
+  `StreetAddress` VARCHAR(45) NULL,
+  `City` VARCHAR(45) NULL,
+  `State` VARCHAR(45) NULL,
+  `Balance` DOUBLE NULL,
+  PRIMARY KEY (`UserID`));
+
+
+
