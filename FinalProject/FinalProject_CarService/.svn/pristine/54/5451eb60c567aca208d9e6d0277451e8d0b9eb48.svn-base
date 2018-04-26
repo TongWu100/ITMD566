@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+body{
+	background: #ebebeb;
+	font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+	font-size:12px;
+	}
+a{
+	text-decoration:none;
+	}
+.ipt{
+	border: 1px solid #d3d3d3;
+	width:200px;
+	height:20px;
+	border-radius:7px;
+	}
+.ipt:focus{
+	border-color: #66afe9;
+
+	}
+
+.head{
+    border-left: 3px solid #59afe4;
+    color: #616161;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    height: 25px;
+    line-height: 25px;
+    text-indent: 11px;
+    width: 100%;
+	margin-top:20px;
+	margin-bottom:20px;
+}

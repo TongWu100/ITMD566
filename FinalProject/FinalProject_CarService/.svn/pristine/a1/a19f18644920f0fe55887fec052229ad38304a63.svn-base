@@ -1,0 +1,10 @@
+#
+jdbc.url=jdbc:mysql://127.0.0.1:3306/carservice?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+#
+jdbc.driver=com.mysql.jdbc.Driver
+#
+jdbc.user=root
+#
+jdbc.password=root
+
+

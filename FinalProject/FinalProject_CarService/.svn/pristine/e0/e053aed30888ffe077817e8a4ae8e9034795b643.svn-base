@@ -1,0 +1,105 @@
+package org.great.ctrl;
+
+import java.util.ArrayList;
+import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+import org.great.entity.Car;
+import org.great.entity.CarPart;
+import org.great.entity.CustomerAccount;
+import org.great.util.Util;
+
+public class BusinessDaoImpl implements BusinessDao {
+
+	public BusinessDaoImpl() {
+		
+	}
+
+	@Override
+	public CustomerAccount getCustomerAccount(String email) {
+		return null;
+	}
+
+	@Override
+	public boolean delCustomerAccount(String email) {
+		return false;
+	}
+
+	@Override
+	public ArrayList<Car> getCarList() {
+		return null;
+	}
+
+	@Override
+	public boolean addCar(Car car) {
+		return false;
+	}
+
+	@Override
+	public boolean delCar(int id) {
+		return false;
+	}
+
+	@Override
+	public ArrayList<CarPart> getCarPartList() {
+		return null;
+	}
+
+	@Override
+	public boolean addCarPart(CarPart Carpart) {
+		return false;
+	}
+
+	@Override
+	public boolean delCarPart(int id) {
+		return false;
+	}
+
+	@Override
+	public boolean addBuyRecord(CustomerAccount customerAccount) {
+		return false;
+	}
+
+	@Override
+	public Map<String, String> login(String userName, String password) {
+		Connection conn = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("isLogin", "flase");
+		map.put("role", "-1");
+		try {
+			statement = conn.prepareStatement("select role,email from user where userName =? and password =?");
+			statement.setString(1, userName);
+			statement.setString(2, password);
+			result = statement.executeQuery();
+			if (result.next()) {
+				map.put("isLogin", "true");
+				map.put("role", result.getString("role"));
+				map.put("email", result.getString("email"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return map;
+	}
+	
+	
+}

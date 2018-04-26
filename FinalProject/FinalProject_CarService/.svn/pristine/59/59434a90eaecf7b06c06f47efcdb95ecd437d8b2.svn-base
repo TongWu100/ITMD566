@@ -1,0 +1,314 @@
+package org.great.ctrl;
+
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.great.entity.Car;
+import org.great.entity.CarPart;
+import org.great.entity.CustomerAccount;
+import org.great.entity.Power;
+import org.great.entity.User;
+import org.great.util.Util;
+
+public class BusinessDaoImpl implements BusinessDao {
+
+	public BusinessDaoImpl() {
+		
+	}
+
+	@Override
+	public CustomerAccount getCustomerAccount(String email) {
+		return null;
+	}
+
+	@Override
+	public boolean delCustomerAccount(String email) {
+		return false;
+	}
+
+	@Override
+	public ArrayList<Car> getCarList() {
+		return null;
+	}
+
+	@Override
+	public boolean addCar(Car car) {
+		return false;
+	}
+
+	@Override
+	public boolean delCar(int id) {
+		return false;
+	}
+
+	@Override
+	public ArrayList<CarPart> getCarPartList() {
+		return null;
+	}
+
+	@Override
+	public boolean addCarPart(CarPart Carpart) {
+		return false;
+	}
+
+	@Override
+	public boolean delCarPart(int id) {
+		return false;
+	}
+
+	@Override
+	public boolean addBuyRecord(CustomerAccount customerAccount) {
+		return false;
+	}
+
+	@Override
+	public Map<String, String> login(String userName, String password) {
+		Connection conn = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("isLogin", "flase");
+		map.put("role", "-1");
+		try {
+			statement = conn.prepareStatement("select role,email from user where userName =? and password =?");
+			statement.setString(1, userName);
+			statement.setString(2, password);
+			result = statement.executeQuery();
+			if (result.next()) {
+				map.put("isLogin", "true");
+				map.put("role", result.getString("role"));
+				map.put("email", result.getString("email"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null){
+					conn.close();
+				}
+				if(statement!=null){
+					statement.close();
+				}
+				if(result!=null){
+					result.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return map;
+	}
+
+	@Override
+	public Power select_power(String rightName) {
+		Connection conn = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		Power power=null;
+		try {
+			statement=conn.prepareStatement("select * from rights where rights_name = ?");
+			statement.setString(1, rightName);
+			result=statement.executeQuery();
+			
+			if(result.next()){
+				power=new Power();
+				power.setRights_name(result.getString("rights_name"));
+				power.setUser_power(result.getString("user_power"));
+				power.setCar_power(result.getString("car_power"));
+				power.setCar_part_power(result.getString("car_part_power"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(conn!=null){
+					conn.close();
+				}
+				if(statement!=null){
+					statement.close();
+				}
+				if(result!=null){
+					result.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return power;
+	}
+
+	@Override
+	public List<User> getUserList() {
+
+		Connection conn = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		List<User> list =new ArrayList<User>();
+		
+		try {
+			statement=conn.prepareStatement("select * from user where username !='admin'");
+			result=statement.executeQuery();
+			
+			while(result.next()){
+				User user =new User();
+				user.setUsername(result.getString("username"));
+				user.setEmail(result.getString("email"));
+				user.setRole(result.getString("role").equals("0")?"管理员":"普通用户");
+				user.setCity(result.getString("city"));
+				user.setStreetaddress(result.getString("streetaddress"));
+				
+				list.add(user);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(conn!=null){
+					conn.close();
+				}
+				if(statement!=null){
+					statement.close();
+				}
+				if(result!=null){
+					result.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	
+	}
+
+	@Override
+	public void delUser(String username) {
+		Connection conn = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		
+		try {
+			statement=conn.prepareStatement("delete from user where username =?");
+			statement.setString(1, username);
+			statement.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(conn!=null){
+					conn.close();
+				}
+				if(statement!=null){
+					statement.close();
+				}
+				if(result!=null){
+					result.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public boolean addUser(User user) {
+		String sql="insert into user values(?,?,?,?,?,?,?)";
+		Object[] params={user.getEmail(),user.getUsername(),user.getPassword(),user.getState(),user.getCity(),user.getStreetaddress(),user.getRole()};
+		update(sql, params);
+		return true;
+	}
+	
+	private void update(String sql, Object[] params){
+		Connection conn = Util.getInstance().getConnetionMirror();
+		try {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			for (int i = 0; i < params.length; i++) {
+				statement.setObject(i + 1, params[i]);
+			}
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public User getUser(String email) {
+		
+		Connection conn = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		User user = null;
+		try {
+			statement=conn.prepareStatement("select * from user where email =?");
+			statement.setString(1, email);
+			result=statement.executeQuery();
+			
+			if(result.next()){
+				user =new User();
+				user.setUsername(result.getString("username"));
+				user.setEmail(result.getString("email"));
+				user.setRole(result.getString("role").equals("0")?"管理员":"普通用户");
+				user.setCity(result.getString("city"));
+				user.setStreetaddress(result.getString("streetaddress"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(conn!=null){
+					conn.close();
+				}
+				if(statement!=null){
+					statement.close();
+				}
+				if(result!=null){
+					result.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
+
+	@Override
+	public boolean addRights(String username) {
+
+		Connection connection = Util.getInstance().getConnetionMirror();
+		PreparedStatement statement = null;
+		try {
+			statement = connection
+					.prepareStatement("insert into rights values(nextval('seq_rights'),?,2,2,2)");
+			statement.setString(1, username);
+			statement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+}

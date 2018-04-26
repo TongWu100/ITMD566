@@ -1,0 +1,43 @@
+package org.great.ctrl;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.great.entity.Car;
+import org.great.entity.CarPart;
+import org.great.entity.CustomerAccount;
+
+
+public interface BusinessDao {
+
+	//登录
+	Map<String, String> login(String userName,String password);
+	
+	//查看用户账户
+	CustomerAccount getCustomerAccount(String email);
+	
+	//删除用户账户
+	boolean delCustomerAccount(String email);
+	
+	//获取卖/租的车列表
+	ArrayList<Car> getCarList();
+	
+	//增加卖/租的车
+	boolean addCar(Car car);
+	
+	//删除卖/租的车
+	boolean delCar(int id);
+
+	//获取卖/租的配件列表
+	ArrayList<CarPart> getCarPartList();
+	
+	//增加卖/租的配件
+	boolean addCarPart(CarPart Carpart);
+	
+	//删除卖/租的配件
+	boolean delCarPart(int id);
+	
+	//添加购买记录
+	boolean addBuyRecord(CustomerAccount customerAccount);
+	
+}

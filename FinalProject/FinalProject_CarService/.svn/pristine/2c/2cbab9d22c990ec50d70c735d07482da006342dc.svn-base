@@ -1,0 +1,110 @@
+package org.great.entity;
+
+public class Power {
+
+	private String rights_edit;
+	private String two_manage;
+	private String password_eidt;
+	private String two_mailcheck;
+	private String two_maileidt;
+	private String two_msg;
+	private String sch_edit;
+	private String sch_compcheck;
+	private String sch_compedit;
+	private String sch_msg;
+	private String coach_comp;
+	private String coach_manage;
+	private String stu_manage;
+	private String exam_apply;
+	
+
+	public Power() {
+	
+	}
+	public String getRights_edit() {
+		return rights_edit;
+	}
+	public void setRights_edit(String rights_edit) {
+		this.rights_edit = rights_edit;
+	}
+	public String getTwo_manage() {
+		return two_manage;
+	}
+	public void setTwo_manage(String two_manage) {
+		this.two_manage = two_manage;
+	}
+	public String getPassword_eidt() {
+		return password_eidt;
+	}
+	public void setPassword_eidt(String password_eidt) {
+		this.password_eidt = password_eidt;
+	}
+	public String getTwo_mailcheck() {
+		return two_mailcheck;
+	}
+	public void setTwo_mailcheck(String two_mailcheck) {
+		this.two_mailcheck = two_mailcheck;
+	}
+	public String getTwo_maileidt() {
+		return two_maileidt;
+	}
+	public void setTwo_maileidt(String two_maileidt) {
+		this.two_maileidt = two_maileidt;
+	}
+	public String getTwo_msg() {
+		return two_msg;
+	}
+	public void setTwo_msg(String two_msg) {
+		this.two_msg = two_msg;
+	}
+	public String getSch_edit() {
+		return sch_edit;
+	}
+	public void setSch_edit(String sch_edit) {
+		this.sch_edit = sch_edit;
+	}
+	public String getSch_compcheck() {
+		return sch_compcheck;
+	}
+	public void setSch_compcheck(String sch_compcheck) {
+		this.sch_compcheck = sch_compcheck;
+	}
+	public String getSch_compedit() {
+		return sch_compedit;
+	}
+	public void setSch_compedit(String sch_compedit) {
+		this.sch_compedit = sch_compedit;
+	}
+	public String getSch_msg() {
+		return sch_msg;
+	}
+	public void setSch_msg(String sch_msg) {
+		this.sch_msg = sch_msg;
+	}
+	public String getCoach_comp() {
+		return coach_comp;
+	}
+	public void setCoach_comp(String coach_comp) {
+		this.coach_comp = coach_comp;
+	}
+	public String getCoach_manage() {
+		return coach_manage;
+	}
+	public void setCoach_manage(String coach_manage) {
+		this.coach_manage = coach_manage;
+	}
+	public String getStu_manage() {
+		return stu_manage;
+	}
+	public void setStu_manage(String stu_manage) {
+		this.stu_manage = stu_manage;
+	}
+	public String getExam_apply() {
+		return exam_apply;
+	}
+	public void setExam_apply(String exam_apply) {
+		this.exam_apply = exam_apply;
+	}
+	
+	
+}

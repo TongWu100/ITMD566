@@ -1,0 +1,121 @@
+
+drop table if exists sequence;     
+create table sequence (         
+seq_name        VARCHAR(50) NOT NULL,         
+current_val     INT         NOT NULL,        
+increment_val   INT         NOT NULL    DEFAULT 1,         
+PRIMARY KEY (seq_name)   ); 
+
+
+INSERT INTO sequence VALUES ('seq_stu', '1', '1');  
+INSERT INTO sequence VALUES ('seq_coach', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_lessons', '1', '1');  
+INSERT INTO sequence VALUES ('seq_exam', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_examapply', '1', '1');  
+INSERT INTO sequence VALUES ('seq_history', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_lesson', '1', '1');  
+INSERT INTO sequence VALUES ('seq_school', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_schpoint', '1', '1');  
+INSERT INTO sequence VALUES ('seq_coachscore', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_schoolmsg', '1', '1');  
+INSERT INTO sequence VALUES ('seq_gmmsg', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_mail', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_appuser', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_backuser', '1', '1'); 
+INSERT INTO sequence VALUES ('seq_rights', '1', '1'); 
+
+
+
+
+create function currval(v_seq_name VARCHAR(50))     
+returns integer    
+begin        
+    declare value integer;         
+    set value = 0;         
+    select current_val into value  from sequence where seq_name = v_seq_name;   
+   return value;   
+end;
+
+create function nextval (v_seq_name VARCHAR(50))  
+    returns integer  
+begin  
+    update sequence set current_val = current_val + increment_val  where seq_name = v_seq_name;  
+    return currval(v_seq_name);  
+end; 
+
+create table stu(stu_id int(4) primary key,stu_identity varchar(20),stu_image varchar(100),stu_name varchar(20),stu_gender varchar(10),stu_birth varchar(20),stu_age int(3),stu_school int(3),stu_lisense varchar(10),stu_date varchar(20),stu_address varchar(20));
+
+create table coach(coach_id int(3) primary key,coach_identity varchar(20),coach_image varchar(100),coach_name varchar(20),coach_gender varchar(10),coach_birth varchar(20),coach_teachage int(3),coach_school int(3),coach_address varchar(20),coach_stucount int(3),coach_simple varchar(200));
+
+create table lessons(lessons_id int(4) primary key,stu_id int(4),coach_id int(3),lesson_id int(1),lessons_currenttime varchar(10),lessons_totaltime varchar(10),passtime varchar(10));
+
+create table exam(exam_id int(4) primary key,stu_id int(4),lesson_id int(1),exam_time varchar(30));
+
+create table examapply(apply_id int(4) primary key,lesson_id int(1),stu_id int(4),apply_time varchar(30));
+
+create table history(h_id int(4) primary key,test_time varchar(30),lesson_id int(1),stu_id int(4),test_result varchar(10));
+
+create table lesson(lesson_id int(1) primary key,lesson_name varchar(10));
+
+create table school(sch_id int(3) primary key,sch_name varchar(100),sch_address varchar(100),sch_simple varchar(200));
+
+create table schpoint(point_id int(5) primary key,point_rule varchar(10),point_facility varchar(10),point_safety varchar(10),point_manner varchar(10),point_avg varchar(10),sch_id int(3),stu_id int(4),point_comment varchar(200),point_time varchar(30));
+
+create table coachscore(score_id int(5) primary key,score_civil varchar(10),score_rule varchar(10),score_clean varchar(10),score_avg varchar(10),coach_id int(3),stu_id int(4),score_time varchar(30));
+
+create table schoolmsg(schmsg_id int(5) primary key,schmsg_head varchar(50),schmsg_body varchar(300),schmsg_time varchar(30),sch_id int(3));
+
+create table gmmsg(gmmsg_id int(5) primary key,gmmsg_head varchar(50),gmmsg_body varchar(300),gmmsg_time varchar(30),user_id int(5));
+
+create table mail(mail_id int(5) primary key,mail_head varchar(50),mail_body varchar(300),stu_id int(4),mail_time varchar(30));
+
+create table appuser(app_username varchar(20) primary key,app_password varchar(30),stu_id int(4));
+
+create table backuser(user_id int(5) primary key,user_account varchar(20),user_password varchar(20),rights_id int(5),user_name varchar(20),sch_id int(3));
+
+create table rights(rights_id int(5) primary key,rights_name varchar(20),rights_edit int(1),two_manage int(1),password_eidt int(1),two_mailcheck int(1),two_maileidt int(1),two_msg int(1),sch_edit int(1),sch_compcheck int(1),sch_compedit int(1),sch_msg int(1),coach_comp int(1),coach_manage int(1),stu_manage int(1),exam_apply int(1));
+
+
+
+insert into lesson values(1,'科目一');
+insert into lesson values(2,'科目二');
+insert into lesson values(3,'科目三');
+insert into lesson values(4,'科目四');
+insert into backuser values(1,'admin','admin',1,'超级管理员',-1);
+insert into backuser values(2,'119','119',2,'运管',-1);
+insert into backuser values(3,'120','120',3,'驾校',1);
+insert into rights values(1,'超级管理员',1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+insert into rights values(2,'运管人员',0,0,0,0,1,1,1,0,0,0,0,0,0,0);
+insert into rights values(3,'驾校',0,0,0,0,0,0,0,0,0,0,1,1,1,0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
